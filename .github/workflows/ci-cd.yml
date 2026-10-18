@@ -33,8 +33,8 @@ jobs:
     - name: Log in to Docker Hub
       uses: docker/login-action@v3
       with:
-        username: ${{ secrets.reyad11 }}
-        password: ${{ secrets.Abdoreyad12 }}
+        username: ${{ secrets.NEWREYAD }}
+        password: ${{ secrets.reyad11 }}
 
     # 5. بناء صورة Docker ورفعها أوتوماتيكياً
     - name: Build and push Docker image
