@@ -1,8 +1,6 @@
-# مرحلة البناء
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# نسخ ملف الـ Solution وباقي المشاريع من جذر المشروع
 COPY ["EventBooking.sln", "./"]
 COPY ["EventBooking.API/EventBooking.API.csproj", "EventBooking.API/"]
 COPY ["EventBooking.Application/EventBooking.Application.csproj", "EventBooking.Application/"]
@@ -15,7 +13,6 @@ COPY . .
 WORKDIR "/src/EventBooking.API"
 RUN dotnet publish "EventBooking.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# مرحلة التشغيل النهائية
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
