@@ -1,9 +1,9 @@
-# 1. مرحلة البناء (Build Stage)
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# 1. مرحلة البناء (Build Stage) بـ .NET 10
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# نسخ ملف الـ Solution من المجلد الرئيسي وباقي المشاريع
-COPY ["../EventBooking.sln", "./"]
+# نسخ ملف الـ Solution وباقي المشاريع مباشرة من الجذر
+COPY ["EventBooking.sln", "./"]
 COPY ["EventBooking.API/EventBooking.API.csproj", "EventBooking.API/"]
 COPY ["EventBooking.Application/EventBooking.Application.csproj", "EventBooking.Application/"]
 COPY ["EventBooking.Domain/EventBooking.Domain.csproj", "EventBooking.Domain/"]
@@ -17,8 +17,8 @@ COPY . .
 WORKDIR "/src/EventBooking.API"
 RUN dotnet publish "EventBooking.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# 2. مرحلة التشغيل النهائية (Runtime Stage)
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+# 2. مرحلة التشغيل النهائية (Runtime Stage) بـ .NET 10
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "EventBooking.API.dll"]
