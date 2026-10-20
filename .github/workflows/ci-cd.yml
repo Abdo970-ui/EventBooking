@@ -41,6 +41,6 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        file: Dockerfile
+        file: EventBooking.API/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/eventbooking-api:latest

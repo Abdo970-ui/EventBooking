@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# نسخ ملف الـ Solution من المجلد الرئيسي (عن طريق الصعود خطوة للخلف ../) وباقي المشاريع
+# نسخ ملف الـ Solution من المجلد الرئيسي وباقي المشاريع
 COPY ["../EventBooking.sln", "./"]
 COPY ["EventBooking.API/EventBooking.API.csproj", "EventBooking.API/"]
 COPY ["EventBooking.Application/EventBooking.Application.csproj", "EventBooking.Application/"]
